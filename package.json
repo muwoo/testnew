@@ -1,0 +1,21 @@
+{
+  "name": "testnew",
+  "version": "1.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ./main.js",
+    "release": "standard-version"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@nut-tree/nut-js": "^1.7.0",
+    "gkm": "^0.2.0",
+    "rubickbase": "^0.9.5"
+  },
+  "devDependencies": {
+    "electron": "^14.0.1",
+    "standard-version": "^9.3.1"
+  }
+}
