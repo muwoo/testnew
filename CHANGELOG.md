@@ -1,4 +1,6 @@
 变更日志
+### [1.0.9](https://github.com/clouDr-f2e/rubick/compare/v1.0.8...v1.0.9) (2021-09-23)
+
 ### [1.0.8](https://github.com/clouDr-f2e/rubick/compare/v1.0.7...v1.0.8) (2021-09-23)
 
 
