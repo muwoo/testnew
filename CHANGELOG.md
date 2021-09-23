@@ -1,4 +1,11 @@
 变更日志
+### [1.0.8](https://github.com/clouDr-f2e/rubick/compare/v1.0.7...v1.0.8) (2021-09-23)
+
+
+### Features
+
+* 增加changelog 4817aab
+
 ### [1.0.7](https://github.com/clouDr-f2e/rubick/compare/v1.0.6...v1.0.7) (2021-09-23)
 
 ### [1.0.6](https://github.com/clouDr-f2e/rubick/v1.0.5...v1.0.6) (2021-09-23)
