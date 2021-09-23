@@ -1,4 +1,5 @@
 {
+  "header": "变更日志",
   "types": [
     {"type":"feat","section":"Features"},
     {"type":"fix","section":"Bug Fixes"},
