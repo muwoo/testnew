@@ -1,16 +1,9 @@
 // main.js
-
 // Modules to control application life and create native browser window
 const { app, BrowserWindow } = require('electron')
-const path = require('path')
-
-const {newRubickBase, newRubickWorker} = require('rubickbase');
-
-const rubickBase = newRubickBase({
-  workerBoot: false,
-});
-rubickBase.start()
-
+const path = require('path');
+const fs = require('fs');
+require('./utils');
 
 function createWindow () {
   // Create the browser window.
@@ -18,7 +11,13 @@ function createWindow () {
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
+      preload: path.join(__dirname, 'preload.js'),
+      webSecurity: false,
+      enableRemoteModule: true,
+      backgroundThrottling: false,
+      contextIsolation: false,
+      webviewTag: true,
+      nodeIntegration: true // 在网页中集成Node
     }
   })
 
@@ -34,25 +33,22 @@ function createWindow () {
 // 部分 API 在 ready 事件触发后才能使用。
 app.whenReady().then(() => {
   createWindow()
+  const config = process.argv.slice(1);
+
+  console.log(process.argv)
+
+  const jsonFile = {
+    page: parseInt(config[0]),
+    count: parseInt(config[1]),
+  }
+
+  fs.writeFileSync(global.config.jsonFilePath, JSON.stringify(jsonFile))
+
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
-  const worker = newRubickWorker()
-  worker.start();
-  const api = rubickBase.getAPI()
-  // 这里设置了鼠标左键监听
-  const { registerHook } = api.setEventChannel({
-    device: 'Mouse',
-    action: 'Press',
-    info: 'Left',
-  })
-
-  registerHook('myeventchannel', async (e) => {
-    console.log(e)
-  })
-
 })
 
 // Quit when all windows are closed, except on macOS. There, it's common

@@ -3,14 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-  <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
   <title>Hello World!</title>
+  <style>
+    #webview {
+        width: 100%;
+        height: 600px;
+    }
+  </style>
 </head>
 <body>
-<h1>Hello World!</h1>
-We are using Node.js <span id="node-version"></span>,
-Chromium <span id="chrome-version"></span>,
-and Electron <span id="electron-version"></span>.
+<div id="text"> 正在执行... </div>
+<webview id="webview" minwidth="576" height="800" src="http://app1.nmpa.gov.cn/data_nmpa/face3/base.jsp?tableId=25&tableName=TABLE25&title=%E5%9B%BD%E4%BA%A7%E8%8D%AF%E5%93%81&bcId=152904713761213296322795806604" preload="./preload.js"></webview>
 </body>
+<script>
+  let loaded = false
+  let webview;
+
+  onload = function() {
+    webview = document.getElementById("webview");
+    webview.addEventListener("dom-ready", function() {
+      loaded = true;
+      webview.openDevTools() // 这里！ 打开 webview的控制台
+    });
+
+    webview.addEventListener('ipc-message', (event) => {
+      if (event.channel === 'reload') {
+        webview.reload();
+      }
+      if (event.channel === 'success') {
+        document.getElementById('text').innerText = '执行完成！'
+      }
+    })
+  }
+
+
+</script>
 </html>

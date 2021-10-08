@@ -4,18 +4,51 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "electron ./main.js",
-    "release": "standard-version"
+    "start": "electron-forge start",
+    "release": "npx electron-forge import",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@nut-tree/nut-js": "^1.7.0",
-    "gkm": "^0.2.0",
-    "rubickbase": "^0.9.5"
+    "electron": "^11.4.10",
+    "electron-squirrel-startup": "^1.0.0",
+    "gkm": "^0.2.0"
   },
   "devDependencies": {
-    "electron": "^14.0.1",
-    "standard-version": "^9.3.1"
+    "@electron-forge/cli": "^6.0.0-beta.61",
+    "@electron-forge/maker-deb": "^6.0.0-beta.61",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.61",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.61",
+    "@electron-forge/maker-zip": "^6.0.0-beta.61",
+    "electron": "^14.0.1"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "testnew"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
   }
 }
